@@ -25,7 +25,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   connectivity: ^0.4.3+1
   google_maps_flutter:
-
+  scoped_model:
 
 dev_dependencies:
   flutter_test:
