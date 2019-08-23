@@ -17,11 +17,13 @@ class MapRootState extends State<MapRoot> {
   String appTitle = "Blank";
   var connectivityResult;
 
-  getMap() async {
+  checkConnectivity() async {
     connectivityResult = await (Connectivity().checkConnectivity());
-    print(connectivityResult);
-
     setState(() {});
+  }
+
+  onMapChanged() {
+    print('map');
     if (connectivityResult == ConnectivityResult.mobile) {
       appTitle = "Mobile Network";
       return NormalMap();
@@ -56,14 +58,16 @@ class MapHome extends StatelessWidget {
           backgroundColor: Colors.green[700],
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            parent.onMapChanged();
+          },
           child: Icon(Icons.map),
         ),
         body: FutureBuilder(
-            future: parent.getMap(),
+            future: parent.checkConnectivity(),
             builder: (context, snapshot) {
-              if (snapshot.hasData) return snapshot.data;
-              return CircularProgressIndicator();
+              return parent.onMapChanged();
+              //return CircularProgressIndicator();
             }));
   }
 }
