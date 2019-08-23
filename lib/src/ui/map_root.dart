@@ -1,4 +1,5 @@
-import 'package:dynamic_maps/src/connectivity_status.dart';
+import 'package:dynamic_maps/src/app_state.dart';
+import 'package:dynamic_maps/src/ui/map_home.dart';
 import 'package:dynamic_maps/src/ui/normal_map.dart';
 import 'package:dynamic_maps/src/ui/satellite_map.dart';
 import 'package:dynamic_maps/src/ui/terrain_map.dart';
@@ -14,7 +15,6 @@ class MapRoot extends StatefulWidget {
 class MapRootState extends State<MapRoot> {
   LatLng center = LatLng(45.521563, -122.677433);
 
-  String appTitle = "Blank";
   var connectivityResult;
 
   checkConnectivity() async {
@@ -22,8 +22,9 @@ class MapRootState extends State<MapRoot> {
     setState(() {});
   }
 
-  onMapChanged() {
-    print('map');
+  String appTitle = "Blank";
+
+  onConnectivityChanged() {
     if (connectivityResult == ConnectivityResult.mobile) {
       appTitle = "Mobile Network";
       return NormalMap();
@@ -44,30 +45,5 @@ class MapRootState extends State<MapRoot> {
       parent: this,
       child: MapHome(),
     );
-  }
-}
-
-class MapHome extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final parent = AppState.of(context).parent;
-
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(parent.appTitle),
-          backgroundColor: Colors.green[700],
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            parent.onMapChanged();
-          },
-          child: Icon(Icons.map),
-        ),
-        body: FutureBuilder(
-            future: parent.checkConnectivity(),
-            builder: (context, snapshot) {
-              return parent.onMapChanged();
-              //return CircularProgressIndicator();
-            }));
   }
 }
