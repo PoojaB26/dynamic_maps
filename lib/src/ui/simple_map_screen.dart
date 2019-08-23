@@ -47,15 +47,6 @@ class MapRootState extends State<MapRoot> {
         ],
         child: MapHome(),
       ),
-//      child: StreamProvider<ConnectivityStreamsModel>(
-//        builder: (context) =>
-//            ConnectivityStreamsModel().connectionStatusController.stream,
-//        child: MapHome(),
-//      ),
-//      child: ChangeNotifierProvider<ConnectivityModel>(
-//        builder: (_) => ConnectivityModel(),
-//        child: MapHome(),
-//      ),
     );
   }
 }
