@@ -3,9 +3,9 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapHome extends StatelessWidget {
   final LatLng center;
-  final Widget onMapChanged;
+  final mapWidget;
   final Future<dynamic> checkConn;
-  MapHome({this.center, this.onMapChanged, this.checkConn});
+  MapHome({this.center, this.mapWidget, this.checkConn});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class MapHome extends StatelessWidget {
         },
         child: Icon(Icons.map),
       ),
-      body: onMapChanged,
+      body: mapWidget,
     );
   }
 }

@@ -23,7 +23,7 @@ class MapRootState extends State<MapRoot> {
     });
   }
 
-  Widget onMapChanged() {
+  Widget onConnectivityChanged() {
     if (connectivityResult == ConnectivityResult.mobile) {
       return NormalMap(
         center: center,
@@ -42,7 +42,7 @@ class MapRootState extends State<MapRoot> {
   Widget build(BuildContext context) {
     return MapHome(
       center: center,
-      onMapChanged: onMapChanged(),
+      mapWidget: onConnectivityChanged(),
       checkConn: checkConnectivity(),
     );
   }
