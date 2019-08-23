@@ -1,10 +1,9 @@
+import 'package:dynamic_maps/src/connectivity_status.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class SatelliteMap extends StatelessWidget {
   GoogleMapController mapController;
-  LatLng center;
-  SatelliteMap(this.center);
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
@@ -17,7 +16,7 @@ class SatelliteMap extends StatelessWidget {
         onMapCreated: _onMapCreated,
         mapType: MapType.satellite,
         initialCameraPosition: CameraPosition(
-          target: center,
+          target: AppState.of(context).parent.center,
           zoom: 11.0,
         ),
       ),
