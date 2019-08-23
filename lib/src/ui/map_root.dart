@@ -16,7 +16,6 @@ class MapRoot extends StatefulWidget {
 
 class MapRootState extends State<MapRoot> {
   LatLng center = LatLng(45.521563, -122.677433);
-  ConnectivityModel connectivityModel;
 
   onMapChanged(connectivityResult) {
     if (connectivityResult == ConnectivityResult.mobile) {
@@ -28,11 +27,6 @@ class MapRootState extends State<MapRoot> {
         color: Colors.grey,
       );
     }
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
   }
 
   @override
