@@ -7,21 +7,16 @@ class MapHome extends StatelessWidget {
     final parent = AppState.of(context).parent;
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text(parent.appTitle),
-          backgroundColor: Colors.green[700],
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            parent.onConnectivityChanged();
-          },
-          child: Icon(Icons.map),
-        ),
-        body: FutureBuilder(
-            future: parent.checkConnectivity(),
-            builder: (context, snapshot) {
-              return parent.onConnectivityChanged();
-              //return CircularProgressIndicator();
-            }));
+      appBar: AppBar(
+        backgroundColor: Colors.green[700],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          parent.checkConnectivity();
+        },
+        child: Icon(Icons.map),
+      ),
+      body: parent.onConnectivityChanged(),
+    );
   }
 }
