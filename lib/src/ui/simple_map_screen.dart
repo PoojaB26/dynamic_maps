@@ -1,5 +1,6 @@
 import 'package:dynamic_maps/src/connectivity_status.dart';
 import 'package:dynamic_maps/src/model/connectivity_model.dart';
+import 'package:dynamic_maps/src/model/connectivity_stream_model.dart';
 import 'package:dynamic_maps/src/ui/map_home.dart';
 import 'package:dynamic_maps/src/ui/normal_map.dart';
 import 'package:dynamic_maps/src/ui/satellite_map.dart';
@@ -17,7 +18,6 @@ class MapRoot extends StatefulWidget {
 
 class MapRootState extends State<MapRoot> {
   LatLng center = LatLng(45.521563, -122.677433);
-  ConnectivityModel connectivityModel;
 
   onMapChanged(connectivityResult) {
     if (connectivityResult == ConnectivityResult.mobile) {
@@ -32,18 +32,30 @@ class MapRootState extends State<MapRoot> {
   }
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return AppState(
       parent: this,
-      child: ChangeNotifierProvider<ConnectivityModel>(
-        builder: (_) => ConnectivityModel(),
+      child: MultiProvider(
+        providers: [
+          ChangeNotifierProvider<ConnectivityModel>(
+            builder: (_) => ConnectivityModel(),
+          ),
+          StreamProvider<ConnectivityResult>(
+            builder: (_) =>
+                ConnectivityStreamsModel().connectionStatusController.stream,
+          ),
+        ],
         child: MapHome(),
       ),
+//      child: StreamProvider<ConnectivityStreamsModel>(
+//        builder: (context) =>
+//            ConnectivityStreamsModel().connectionStatusController.stream,
+//        child: MapHome(),
+//      ),
+//      child: ChangeNotifierProvider<ConnectivityModel>(
+//        builder: (_) => ConnectivityModel(),
+//        child: MapHome(),
+//      ),
     );
   }
 }

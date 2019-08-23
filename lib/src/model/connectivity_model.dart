@@ -8,13 +8,10 @@ class ConnectivityModel extends ChangeNotifier {
   ConnectivityResult get connectivity => _connectivity;
   String get connectivityName => _connectivityName;
 
-  void checkConnectivity() async {
-    _connectivity = await (Connectivity().checkConnectivity());
-    notifyListeners();
-
-    if (_connectivity == ConnectivityResult.mobile)
+  void updateName(ConnectivityResult result) async {
+    if (result == ConnectivityResult.mobile)
       _connectivityName = "Mobile Network";
-    else if (_connectivity == ConnectivityResult.wifi)
+    else if (result == ConnectivityResult.wifi)
       _connectivityName = "WiFi Network";
     else
       _connectivityName = "No Network";

@@ -1,5 +1,7 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:dynamic_maps/src/connectivity_status.dart';
 import 'package:dynamic_maps/src/model/connectivity_model.dart';
+import 'package:dynamic_maps/src/model/connectivity_stream_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scoped_model/scoped_model.dart';
@@ -21,14 +23,14 @@ class MapHome extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Provider.of<ConnectivityModel>(context, listen: false)
-              .checkConnectivity();
+          Provider.of<ConnectivityModel>(context, listen: false).updateName(
+              Provider.of<ConnectivityResult>(context, listen: false));
         },
         child: Icon(Icons.map),
       ),
       body: Consumer(
-        builder: (context, ConnectivityModel model, child) {
-          return parent.onMapChanged(model.connectivity);
+        builder: (context, ConnectivityResult model, child) {
+          return parent.onMapChanged(model);
         },
       ),
     );
