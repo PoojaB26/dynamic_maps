@@ -1,38 +1,27 @@
-import 'package:connectivity/connectivity.dart';
-import 'package:dynamic_maps/src/connectivity_status.dart';
-import 'package:dynamic_maps/src/model/connectivity_model.dart';
-import 'package:dynamic_maps/src/model/connectivity_stream_model.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:scoped_model/scoped_model.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapHome extends StatelessWidget {
+  final LatLng center;
+  final Widget onMapChanged;
+  final Future<dynamic> checkConn;
+  MapHome({this.center, this.onMapChanged, this.checkConn});
+
   @override
   Widget build(BuildContext context) {
-    final parent = AppState.of(context).parent;
-
     print('asdh');
     return Scaffold(
       appBar: AppBar(
-        title: Consumer(
-          builder: (context, ConnectivityModel model, child) {
-            return Text(model.connectivityName ?? "Blank");
-          },
-        ),
+        title: Text("Blank"),
         backgroundColor: Colors.green[700],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Provider.of<ConnectivityModel>(context, listen: false).updateName(
-              Provider.of<ConnectivityResult>(context, listen: false));
+          checkConn;
         },
         child: Icon(Icons.map),
       ),
-      body: Consumer(
-        builder: (context, ConnectivityResult model, child) {
-          return parent.onMapChanged(model);
-        },
-      ),
+      body: onMapChanged,
     );
   }
 }
