@@ -1,6 +1,7 @@
 import 'package:dynamic_maps/src/connectivity_status.dart';
 import 'package:dynamic_maps/src/model/connectivity_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class MapHome extends StatelessWidget {
@@ -11,9 +12,8 @@ class MapHome extends StatelessWidget {
     print('asdh');
     return Scaffold(
       appBar: AppBar(
-        title: ScopedModelDescendant<ConnectivityModel>(
-          rebuildOnChange: true,
-          builder: (context, child, model) {
+        title: Consumer(
+          builder: (context, ConnectivityModel model, child) {
             return Text(model.connectivityName ?? "Blank");
           },
         ),
@@ -21,13 +21,13 @@ class MapHome extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          ScopedModel.of<ConnectivityModel>(context).checkConnectivity();
+          Provider.of<ConnectivityModel>(context, listen: false)
+              .checkConnectivity();
         },
         child: Icon(Icons.map),
       ),
-      body: ScopedModelDescendant<ConnectivityModel>(
-        rebuildOnChange: true,
-        builder: (context, child, model) {
+      body: Consumer(
+        builder: (context, ConnectivityModel model, child) {
           return parent.onMapChanged(model.connectivity);
         },
       ),

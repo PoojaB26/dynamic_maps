@@ -1,7 +1,7 @@
 import 'package:connectivity/connectivity.dart';
-import 'package:scoped_model/scoped_model.dart';
+import 'package:flutter/cupertino.dart';
 
-class ConnectivityModel extends Model {
+class ConnectivityModel extends ChangeNotifier {
   ConnectivityResult _connectivity;
   String _connectivityName;
 

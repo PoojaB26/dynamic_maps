@@ -7,6 +7,7 @@ import 'package:dynamic_maps/src/ui/terrain_map.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:connectivity/connectivity.dart';
+import 'package:provider/provider.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class MapRoot extends StatefulWidget {
@@ -39,8 +40,10 @@ class MapRootState extends State<MapRoot> {
   Widget build(BuildContext context) {
     return AppState(
       parent: this,
-      child: ScopedModel<ConnectivityModel>(
-          model: new ConnectivityModel(), child: MapHome()),
+      child: ChangeNotifierProvider<ConnectivityModel>(
+        builder: (_) => ConnectivityModel(),
+        child: MapHome(),
+      ),
     );
   }
 }

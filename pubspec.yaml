@@ -26,6 +26,7 @@ dependencies:
   connectivity: ^0.4.3+1
   google_maps_flutter:
   scoped_model:
+  provider:
 
 dev_dependencies:
   flutter_test:
