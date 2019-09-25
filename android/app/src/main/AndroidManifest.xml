@@ -12,7 +12,7 @@
         android:icon="@mipmap/ic_launcher">
         <!-- Add the following entry, with your API key -->
         <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCSSi1bsYnoFYioWRwQq7dZsDjE3fUD76A"/>
+            android:value="GOOGLE_MAPS_API_KEY"/>
 
         <activity
             android:name=".MainActivity"
